@@ -3,8 +3,11 @@
 import RPi.GPIO as GPIO
 import sys
 
+# Use physical pin numbers
+GPIO.setmode(GPIO.BOARD)
 
 
+GPIO.setup(xx, GPIO.IN)  #pon aqui el pin de tu pulsador
 
 # print the HTTP header
 def printHTTPheader():
@@ -19,7 +22,7 @@ def printHTMLHead(title):
     print "    <title>"
     print title
     print "    </title>"
-    
+
 
     print "</head>"
 
@@ -30,18 +33,24 @@ def printHTMLHead(title):
 def show_title_1():
     print "<h2>GPIO status</h2>"
 
+    if GPIO.input(15)== 0:
+       print "<h2>El pulsador esta a False</h2>"
+
+    else:
+       print "<h2>El pulador esta a  True</h2>"
+
 
 
 # connect to the db and show some stats
 # argument option is the number of hours
-def show_stats(option):
+def show_stats():
 
 
     print "<hr>"
 
     print "<h2>El estado actual de los pines es: </h2>"
-	
-	
+
+
 	#### Rellenar para saber el estado de los pines que controlan los led y el pulsador
 
     print "<hr>"
@@ -72,7 +81,7 @@ def main():
     print "<h1>Raspberry Pi Monitor & Control</h1>"
     print "<hr>"
     show_title_1()
-    show_stats(option)
+    show_stats()
     print "</body>"
     print "</html>"
 
